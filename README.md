@@ -15,6 +15,8 @@ Spool is the optional [Valve](https://github.com/relicloops/valve) companion for
 
 Valve remains the argv parser. Apps that prefer a hand-rolled `strcmp` ladder never need to link Spool. The public header only forward-declares `valve_t`; it does not include `valve/valve.h`.
 
+Documentation lives at [spool.relicloops.org](https://spool.relicloops.org), including a quick start, the dispatch concepts, current status, and a verified source download.
+
 ## Status and limitations
 
 Spool `1.x` is experimental. Minor releases may change the public source or ABI contract, so consumers should pin an exact version tag. Spool will announce when the experimental status is lifted; from that release onward, breaking public API or ABI changes require a major-version bump, backward-compatible additions require a minor-version bump, and fixes require a patch-version bump. The final `BUILD` component identifies the published build.

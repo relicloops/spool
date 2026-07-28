@@ -15,6 +15,7 @@ the community.
 
 ## Docs
 
+* [spool.relicloops.org](https://spool.relicloops.org) — quick start, concepts, status, downloads
 * [README](README.md)
 * [Reference](docs/reference/README.md)
 * [Example](docs/example/README.md)
