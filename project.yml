@@ -1,0 +1,87 @@
+---
+:project:
+  :name: spool
+  :which_ceedling: gem
+  :ceedling_version: 1.1.1
+  :use_mocks: false
+  :use_test_preprocessor: :none
+  :use_backtrace: :simple
+  :build_root: .cache/ceedling
+  :test_file_prefix: test_
+  :default_tasks:
+    - test:all
+  :test_threads: 4
+  :compile_threads: 4
+
+:test_build:
+  :use_assembly: false
+
+:plugins:
+  :load_paths: []
+  :enabled:
+    - compile_commands_json_db
+    - report_tests_pretty_stdout
+
+:paths:
+  :test:
+    - +:test/**
+    - -:test/support
+  :source:
+    - src/spool/unit
+    - test/support
+    - subprojects/valve/src/core/unit
+    - subprojects/valve/src/core/unit/argv
+    - subprojects/valve/src/core/unit/option
+    - subprojects/valve/src/core/unit/conflict
+    - subprojects/valve/src/core/unit/requirement
+    - subprojects/valve/src/core/unit/result
+    - subprojects/valve/src/core/unit/schema
+    - subprojects/valve/src/core/unit/value
+    - subprojects/valve/src/core/unit/verb
+  :include:
+    - include
+    - include/spool
+    - src/spool
+    - subprojects/valve/include
+    # Ceedling runners strip directory prefixes from #includes, so
+    # "valve/valve.h" becomes "valve.h" and needs this path.
+    - subprojects/valve/include/valve
+    - subprojects/valve/src/core
+  :support: []
+  :libraries: []
+
+:files:
+  :test: []
+  :source:
+    # Basename clash with spool version units; stubs live in test/support.
+    - -:subprojects/valve/src/core/unit/version_get.c
+    - -:subprojects/valve/src/core/unit/version_string.c
+  :support: []
+
+:defines:
+  :test: []
+  :release: []
+
+:flags:
+  :test:
+    :compile:
+      "*":
+        - -std=c23
+        - -Wall
+        - -Wextra
+        - -Wpedantic
+        # glibc: expose setenv/unsetenv under strict -std=c* (Linux CI).
+        - -D_DEFAULT_SOURCE
+        - -DSPOOL_VERSION=\"1.0.0-000\"
+        - -DVALVE_VERSION=\"1.0.0-000\"
+    :link:
+      # openpty (Valve color TTY probes) lives in libutil on Linux and macOS.
+      - -lutil
+
+# Toolchain (:tools, compiler, gcov, gcovr) is prepared by Meson into
+# build/ceedling-toolchain.yml. Prefer `meson test` or `build/spool-ceedling`
+# so the correct OS/architecture/compiler selection is always applied.
+
+:unity:
+  :defines:
+    - UNITY_EXCLUDE_FLOAT

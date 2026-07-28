@@ -1,0 +1,8 @@
+[wrap-git]
+directory = valve
+url = https://github.com/relicloops/valve.git
+revision = v1.0.0-000
+depth = 1
+
+[provide]
+valve = valve_dep

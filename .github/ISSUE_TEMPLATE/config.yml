@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: README
+    url: https://github.com/relicloops/spool#readme
+    about: Usage examples, API notes, and build/test commands for experimental 1.0.x.
+  - name: Contributing
+    url: https://github.com/relicloops/spool/blob/main/CONTRIBUTING.md
+    about: How to build with Meson and run Ceedling tests before opening an issue.
+  - name: Support
+    url: https://github.com/relicloops/spool/blob/main/SUPPORT.md
+    about: Where to ask for help and what is in scope.
+  - name: Code of Conduct
+    url: https://github.com/relicloops/spool/blob/main/CODE_OF_CONDUCT.md
+    about: Community standards for participation.
+  - name: Security policy
+    url: https://github.com/relicloops/spool/security/policy
+    about: Report vulnerabilities privately — do not file a public issue.

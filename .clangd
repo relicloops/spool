@@ -1,0 +1,23 @@
+# clangd config for spool (Cursor / Zed / any clangd-based editor).
+#
+# -xc forces the C frontend: clangd otherwise parses standalone headers as
+# Objective-C++, which rejects -std=c23. Prefer Meson's build/compile_commands.json
+# when configured. Ceedling's database covers test/ after a coverage run.
+CompileFlags:
+  CompilationDatabase: build
+  Add:
+    - -xc
+    - -std=c23
+    - -Iinclude
+    - -Isrc/spool
+    - -Isubprojects/valve/include
+    - -Wall
+    - -Wextra
+
+If:
+  PathMatch: test/.*\.c
+CompileFlags:
+  CompilationDatabase: .cache/ceedling/artifacts
+  Add:
+    - -xc
+    - -std=c23

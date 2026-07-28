@@ -1,0 +1,71 @@
+name: Feature request
+description: Propose an additive change for experimental Spool 1.0.x.
+title: "[feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea.
+
+        Spool is **experimental 1.0.x** — API surface may move while that status remains.
+        Please search [existing issues](https://github.com/relicloops/spool/issues?q=is%3Aissue)
+        first.
+
+  - type: dropdown
+    id: feature-area
+    attributes:
+      label: Feature area
+      options:
+        - Dispatch / ownership
+        - Route matching
+        - Version helpers
+        - Build (Meson) / tests (Ceedling)
+        - Docs / packaging
+        - New area (describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What are you trying to do that Spool does not support cleanly today?
+      placeholder: "When I ..., Spool doesn't ... so I end up ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Route-table sketch, C snippet, or behaviour description are all welcome.
+      render: c
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds you already tried, or APIs you would rather not add.
+
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Target track
+      description: Spool is experimental; minor versions may still break.
+      options:
+        - Additive in 1.0.x (preferred)
+        - Willing to discuss a breaking change
+        - No preference
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pr
+    attributes:
+      label: Would you submit a pull request?
+      options:
+        - "Yes"
+        - Maybe with guidance
+        - "No — reporting only"
