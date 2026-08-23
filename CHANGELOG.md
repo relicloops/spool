@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ### Documentation
 
+- Regenerate the changelog
 - Point at the published documentation site
 ## [1.0.0-000] - 2026-07-28
 

@@ -34,9 +34,10 @@ spool-demo/
 ├── main.c
 ├── meson.build
 └── subprojects/
-    ├── valve.wrap
     └── spool.wrap
 ```
+
+Valve is not wrapped here. It is an installed library that Spool finds through pkg-config, and it has no dependencies of its own — vendoring it only forces a source build of something already present.
 
 ### `main.c`
 
@@ -92,15 +93,6 @@ int main(int argc, char **argv) {
 }
 ```
 
-### `subprojects/valve.wrap`
-
-```ini
-[wrap-git]
-directory = valve
-url = https://github.com/relicloops/valve.git
-revision = v1.0.0-000
-```
-
 ### `subprojects/spool.wrap`
 
 Pin a published Spool version tag rather than tracking `main`:
@@ -141,7 +133,7 @@ meson compile -C build
 
 ## Install
 
-Install Spool from a source checkout to a prefix (Valve must be available as a subproject wrap or already installed):
+Install Spool from a source checkout to a prefix. Valve must already be installed and visible to pkg-config:
 
 ```bash
 meson setup build --buildtype=release --prefix="$HOME/.local"
@@ -197,10 +189,11 @@ spool-ceedling test:all
 
 See [Contributing](CONTRIBUTING.md) for prerequisites and CI details.
 
-Local Valve co-dev (gitignored):
+Local Valve co-dev: install Valve to the same prefix and put it first on `PKG_CONFIG_PATH`, rather than symlinking it into `subprojects/`.
 
 ```bash
-ln -sfn ../valve subprojects/valve
+meson install -C ../valve/build --destdir=""
+PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH" meson setup build
 ```
 
 ## License
