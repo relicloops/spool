@@ -17,7 +17,7 @@
       # glibc: expose setenv/unsetenv under strict -std=c* (Linux CI).
       - -D_DEFAULT_SOURCE
       - --coverage
-      - -DSPOOL_VERSION=\"1.0.0-000\"
+      - -DSPOOL_VERSION=\"1.0.0-001\"
       - -DVALVE_VERSION=\"1.0.0-000\"
     :link:
       - --coverage
