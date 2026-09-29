@@ -4,7 +4,7 @@
 # where Valve is already installed and has been for months. Valve has no
 # dependencies of its own, so nothing was gained by vendoring it, and the
 # checked-out copy under subprojects/ drifted against its own wrap revision.
-valve_dep = dependency('valve')
+valve_dep = dependency('valve', version: '>=2.0.2')
 
 spool_c_args = [
   '-DSPOOL_VERSION="' + spool_version + '"',
