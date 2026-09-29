@@ -102,7 +102,6 @@ TEST_SOURCE_FILE("vl_requirements_copy_table_.c")
 TEST_SOURCE_FILE("vl_results_clear_.c")
 TEST_SOURCE_FILE("vl_verb_get.c")
 
-
 static int g_handler_rc;
 static char g_seen_verb[64];
 static char g_seen_subverb[64];
@@ -116,12 +115,10 @@ static int on_serve_(const char *verb, const char *subverb, void *userdata) {
   return g_handler_rc;
 }
 
-static int on_language_list_(const char *verb, const char *subverb,
-                             void *userdata) {
+static int on_language_list_(const char *verb, const char *subverb, void *userdata) {
   (void)userdata;
   snprintf(g_seen_verb, sizeof(g_seen_verb), "%s", verb ? verb : "");
-  snprintf(g_seen_subverb, sizeof(g_seen_subverb), "%s",
-           subverb ? subverb : "");
+  snprintf(g_seen_subverb, sizeof(g_seen_subverb), "%s", subverb ? subverb : "");
   return 7;
 }
 
@@ -148,8 +145,8 @@ void test_spool_version_string_contains_spool(void) {
 
 void test_run_routes_matches_verb(void) {
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   TEST_ASSERT_EQUAL_INT(42, spool_run_routes_("serve", nullptr, routes, nullptr));
   TEST_ASSERT_EQUAL_STRING("serve", g_seen_verb);
@@ -157,9 +154,9 @@ void test_run_routes_matches_verb(void) {
 
 void test_run_routes_matches_subverb(void) {
   const spool_route_t routes[] = {
-      {.verb = "language", .subverb = "list", .run = on_language_list_},
-      {.verb = "language", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "language", .subverb = "list", .run = on_language_list_},
+    {.verb = "language", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   TEST_ASSERT_EQUAL_INT(7, spool_run_routes_("language", "list", routes, nullptr));
   TEST_ASSERT_EQUAL_STRING("language", g_seen_verb);
@@ -168,24 +165,24 @@ void test_run_routes_matches_subverb(void) {
 
 void test_run_routes_null_subverb_matches_any(void) {
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   TEST_ASSERT_EQUAL_INT(42, spool_run_routes_("serve", "extra", routes, nullptr));
 }
 
 void test_run_routes_unknown_verb_returns_minus_one(void) {
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   TEST_ASSERT_EQUAL_INT(-1, spool_run_routes_("nope", nullptr, routes, nullptr));
 }
 
 void test_run_routes_null_args_return_minus_one(void) {
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   TEST_ASSERT_EQUAL_INT(-1, spool_run_routes_(nullptr, nullptr, routes, nullptr));
   TEST_ASSERT_EQUAL_INT(-1, spool_run_routes_("serve", nullptr, nullptr, nullptr));
@@ -193,17 +190,17 @@ void test_run_routes_null_args_return_minus_one(void) {
 
 void test_spool_dispatch_serve_hits_handler_and_destroys(void) {
   static const vl_verb_t serve_cmd = {
-      .name = "serve",
-      .description = "Run the server.",
+    .name = "serve",
+    .description = "Run the server.",
   };
   static const vl_verb_t *const verbs[] = {&serve_cmd, nullptr};
   const vl_executable_t settings = {
-      .program_name = "spool-test",
-      .program_version = "0",
-      .description = "test",
-      .usage = "spool-test <verb>",
-      .assign = VL_ASSIGN_INLINE,
-      .verbs = verbs,
+    .program_name = "spool-test",
+    .program_version = "0",
+    .description = "test",
+    .usage = "spool-test <verb>",
+    .assign = VL_ASSIGN_INLINE,
+    .verbs = verbs,
   };
 
   valve_t *v = vl_create(&settings);
@@ -214,8 +211,8 @@ void test_spool_dispatch_serve_hits_handler_and_destroys(void) {
   TEST_ASSERT_FALSE(vl_reserved_fired(v));
 
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
 
   int flag = 0;
@@ -227,15 +224,15 @@ void test_spool_dispatch_serve_hits_handler_and_destroys(void) {
 
 void test_spool_dispatch_unknown_verb_returns_minus_one(void) {
   static const vl_verb_t serve_cmd = {
-      .name = "serve",
-      .description = "Run the server.",
+    .name = "serve",
+    .description = "Run the server.",
   };
   static const vl_verb_t *const verbs[] = {&serve_cmd, nullptr};
   const vl_executable_t settings = {
-      .program_name = "spool-test",
-      .program_version = "0",
-      .assign = VL_ASSIGN_INLINE,
-      .verbs = verbs,
+    .program_name = "spool-test",
+    .program_version = "0",
+    .assign = VL_ASSIGN_INLINE,
+    .verbs = verbs,
   };
 
   valve_t *v = vl_create(&settings);
@@ -245,8 +242,8 @@ void test_spool_dispatch_unknown_verb_returns_minus_one(void) {
   TEST_ASSERT_EQUAL_INT(0, vl_parse(v, 2, argv));
 
   const spool_route_t routes[] = {
-      {.verb = "quota", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "quota", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
 
   TEST_ASSERT_EQUAL_INT(-1, spool_dispatch(&v, routes, nullptr));
@@ -255,8 +252,8 @@ void test_spool_dispatch_unknown_verb_returns_minus_one(void) {
 
 void test_spool_dispatch_null_args_return_minus_one(void) {
   const spool_route_t routes[] = {
-      {.verb = "serve", .subverb = nullptr, .run = on_serve_},
-      {.verb = nullptr},
+    {.verb = "serve", .subverb = nullptr, .run = on_serve_},
+    {.verb = nullptr},
   };
   valve_t *v = nullptr;
   TEST_ASSERT_EQUAL_INT(-1, spool_dispatch(nullptr, routes, nullptr));

@@ -11,10 +11,8 @@
 
 #include <stddef.h>
 
-const spool_route_t *spool_route_find_(const char *verb, const char *subverb,
-                                       const spool_route_t *routes);
+const spool_route_t *spool_route_find_(const char *verb, const char *subverb, const spool_route_t *routes);
 
-int spool_run_routes_(const char *verb, const char *subverb,
-                      const spool_route_t *routes, void *userdata);
+int spool_run_routes_(const char *verb, const char *subverb, const spool_route_t *routes, void *userdata);
 
 #endif /* SPOOL_PRIVATE_H */

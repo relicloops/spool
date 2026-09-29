@@ -48,6 +48,10 @@ if ceedling.found() and gcovr.found()
   toolchain_conf.set('C_COMPILER', compiler_cmd)
   toolchain_conf.set('GCOV_EXECUTABLE', gcov_command)
   toolchain_conf.set('GCOVR_EXECUTABLE', gcovr_command)
+  # The suite links the installed Valve (pkg-config), as the library does;
+  # there is no vendored copy to compile any more.
+  toolchain_conf.set('VALVE_INCLUDEDIR', valve_dep.get_variable(pkgconfig: 'includedir'))
+  toolchain_conf.set('VALVE_LIBDIR', valve_dep.get_variable(pkgconfig: 'libdir'))
 
   ceedling_toolchain = configure_file(
     input: 'test/ceedling-toolchain.yml.in',

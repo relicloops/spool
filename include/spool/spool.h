@@ -5,8 +5,7 @@
  * here so the public surface stays a companion, not a Valve header dump. */
 typedef struct valve valve_t;
 
-typedef int (*spool_handler_fn)(const char *verb, const char *subverb,
-                                void *userdata);
+typedef int (*spool_handler_fn)(const char *verb, const char *subverb, void *userdata);
 
 typedef struct spool_route {
   const char *verb;

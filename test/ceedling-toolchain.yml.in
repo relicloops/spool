@@ -9,6 +9,9 @@
       @C_COMPILER@
     :arguments:
       - "-I\"${5}\""
+      - "-I@VALVE_INCLUDEDIR@"
+      # Ceedling runners strip directory prefixes: "valve/valve.h" -> "valve.h".
+      - "-I@VALVE_INCLUDEDIR@/valve"
       - "-D\"${6}\""
       - "-DGNU_COMPILER"
       - "-g"
@@ -25,6 +28,9 @@
       - "-o \"${2}\""
       - ""
       - "${4}"
+      - "-L@VALVE_LIBDIR@"
+      - "-Wl,-rpath,@VALVE_LIBDIR@"
+      - "-lvalve"
   :test_fixture:
     :executable: "${1}"
     :arguments: []
@@ -36,6 +42,9 @@
       - "-fprofile-arcs"
       - "-ftest-coverage"
       - "-I\"${5}\""
+      - "-I@VALVE_INCLUDEDIR@"
+      # Ceedling runners strip directory prefixes: "valve/valve.h" -> "valve.h".
+      - "-I@VALVE_INCLUDEDIR@/valve"
       - "-D\"${6}\""
       - "-DGCOV_COMPILER"
       - "-DCODE_COVERAGE"
@@ -54,6 +63,9 @@
       - "${5}"
       - "-o \"${2}\""
       - "${4}"
+      - "-L@VALVE_LIBDIR@"
+      - "-Wl,-rpath,@VALVE_LIBDIR@"
+      - "-lvalve"
   :gcov_fixture:
     :executable: "${1}"
     :arguments: []
