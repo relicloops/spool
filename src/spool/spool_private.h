@@ -2,7 +2,7 @@
 #define SPOOL_PRIVATE_H
 
 #ifndef SPOOL_VERSION
-#define SPOOL_VERSION "1.0.0-001"
+#define SPOOL_VERSION "1.0.0-002"
 #endif
 
 #include "spool/spool.h"

@@ -1,7 +1,7 @@
 project(
   'spool',
   'c',
-  version: '1.0.0-001',
+  version: '1.0.0-002',
   license: 'Apache-2.0',
   meson_version: '>=1.4',
   default_options: [
